@@ -1,0 +1,202 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "Access role API",
+      "version": "1.0.0",
+      "title": "Access role API",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "tags": [
+        {
+          "name": "Access roles API",
+          "description": "Test API"
+        }
+      ],
+      "servers": [
+        {
+        "url": "/"
+        }
+    ],
+    "components": {
+        "securitySchemes":{
+            "x-access-token":{
+                "type":"http",
+                "scheme":"bearer",
+                "bearerFormat":"JWT"
+            }
+
+        },
+        "security":{
+            "x-access-token":[]
+        },
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                    "type": "string"
+                    },
+                    "email": {
+                    "type": "string"
+                    },
+                    "public_id":{
+                        "type":"string"
+                    }
+                }
+            },
+            "Role":{
+            "type" : "object",
+            "properties" : {
+                "id" : {
+                    "type" : "integer"
+                },
+                "name":{
+                    "type":"string"
+                }
+            }
+        },
+        "userRole":{
+            "type":"object",
+            "properties":{
+                "user_id":{
+                    "type":"integer"
+                },
+                "role_name":{
+                    "type":"string"
+                }
+            }
+        },
+        "Id":{
+            "type" : "integer",
+            "properties" : {
+                "name" : {
+                    "type" : "integer"
+                }
+            }
+        }
+        }
+    },
+    "paths": {
+        "/user": {
+            "get": {
+                "security":{"x-access-token":[]},
+            "tags": [
+                "Retreive current user details"
+            ],
+            "produces":"application/json",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+            }
+            }
+            }
+        },
+        "/user/{user_id}": {
+            "get": {
+                "security":{"x-access-token":[]},
+                "tags": [
+                    "Get user details from API"
+                ],
+                "summary": "Get User details",
+                "parameters": [{
+                  "name": "user_id",
+                  "in": "path",
+                  "description": "Get specific user details",
+                  "required": true,
+                  "type": "integer",
+                  "schema":{
+                    "$ref": "#/components/schemas/Id"
+                  }
+                }],
+            "produces":"application/json",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+            }
+            }
+            }
+        },
+        "/admin/users":{
+            "get": {
+                "security":{"x-access-token":[]},
+            "tags": [
+                "Retreive all users for admin login"
+            ],
+            "produces":"application/json",
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+                },
+                "404": {
+                    "description": "NOT FOUND",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+            }
+            }
+        }
+
+        },
+        "/admin/user/role/add":{
+            "post": {
+                "tags": [
+                    "Add role to user"
+                ],
+                "security":{"x-access-token":[]},
+                "summary": "Add role",
+                "requestBody": {
+                "description": "Post New role To User",
+                "required": true,
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/userRole"
+                        }
+                    }
+                }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                        "$ref": "#/components/schemas/userRole"
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "schema": {
+                        "$ref": "#/components/schemas/userRole"
+                        }
+                }
+                }
+                }
+
+        }
+
+
+    }
+}
