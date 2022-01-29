@@ -7,7 +7,7 @@ class AppTestCase(unittest.TestCase):
         self.ctx = app.app_context()
         self.ctx.push()
         self.client = app.test_client()
-        self.user_to_make_admin=17
+        self.user_to_make_admin=24
         user_token= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiJiNzFlNzdkZi04ZDFmLTRlNjktOTRkNC05OWIyMjNhZmYwNjAiLCJleHAiOjE2NDM0NDk4MTMsInJvbGVzIjpbInVzZXIiXX0.RpJ9u-pncUs6JiBFzrnZWPp8NyXvZB1htBibCHx7Gew"
         admin_token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI0NGQ3MDk4Zi0xYmFlLTQ0MmQtODdhOS1iZDI2ZWVjOGUzY2YiLCJleHAiOjE2NDM0NDk3ODAsInJvbGVzIjpbImFkbWluIl19.3bil6sYZjANBS9fy0siOE41MJUCUSFTtBsQ_4wAOMTE"
         self.headers_admin = {'Content-Type': 'application/json', 'x-access-token': admin_token}
